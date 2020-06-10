@@ -4,9 +4,12 @@
 /* Create variables for principal, interest rate, and years. Assign them the values 200000, 0.05, and 30 respectively. Create another value called name and give it the value of your own name.
 */
 
+/*
 
-
-
+let principle = 200000;
+let interest = 0.05;
+let years = 30;
+let name = 'Tim McDonald';
 
 // 🏡 Task 1.5: Simple Math
 /* To create a monthly mortgage rate calculator, we need to know the number of years in months and the monthly interest rate. 
@@ -15,7 +18,11 @@
 (2) Create another variable called `periods` and give it the value of years*12.
 */
 
+/*s
+let monthlyInterestRate = (interest / 12);
+let periods = (years * 12);
 
+*/
 
 
 // 🏡 Task 2: Harder Math
@@ -36,8 +43,12 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 When your math is correct, monthlyRate will equal 1073.64
 */
 
-
-
+/*
+let n1 = (1 + I)^N;
+let n2 = n1 * I;
+let numerator = n1 * n2;
+let denominator = n1 - 1;
+let monthlyRate = numerator/denominator;*/
 
 // 🏡 Task 3: Function
 /* Create a function called `mortgageCalculator` that combines all of the steps from task 1 and 2 and returns a sentence "{Name}, your monthly rate is ${monthlyRate}"
@@ -46,7 +57,34 @@ If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly 
 */
 
 
+/* formula
+M = P [ I ( 1 + I )^N ] / [ ( 1 + I )^N – 1 ]
+*/
 
+/*
+
+function mortgageCalculator () {
+    let principle = 200000;
+let interest = 0.05;
+let years = 30;
+let name = 'Tim McDonald';
+
+let monthlyInterestRate = (interest / 12);
+let periods = (years * 12);
+
+let n1 = Math.pow((1 + monthlyInterestRate), periods );
+let n2 = n1 * monthlyInterestRate;
+let numerator = n2;
+let denominator = n1 - 1;
+let monthlyRate = principle * (numerator / denominator);
+monthlyRate = monthlyRate.toFixed(2);
+
+    return `${name}, your monthly rate is ${monthlyRate}`
+}
+
+mortgageCalculator();
+
+*/
 
 
 // 🏡 Task 4: Arguments and Parameters
@@ -56,8 +94,29 @@ For example,
 mortgageCalculator(200000, 0.05, 30); <-- should return 1,073.64
 */
 
+/*
+
+function mortgageCalculator (principle, interest, years) {
+
+let name = 'Tim McDonald';
+
+let monthlyInterestRate = (interest / 12);
+let periods = (years * 12);
+
+let n1 = Math.pow((1 + monthlyInterestRate), periods );
+let n2 = n1 * monthlyInterestRate;
+let numerator = n2;
+let denominator = n1 - 1;
+let monthlyRate = principle * (numerator / denominator);
+monthlyRate = monthlyRate.toFixed(2);
+
+    return `${name}, your monthly rate is ${monthlyRate}`
+}
+
+mortgageCalculator();
 
 
+*/
 
 
 // 🏡 Task 5: Conditionals
@@ -68,8 +127,40 @@ Then, add control flow within your function such that IF creditScore is above 74
 Hint: To drop an interest rate by 5% you can take monthlyRate and multiply it by 0.95. Similarly, to increase an interest rate by 5% you'd do monthlyRate * 1.05. 
 */
 
+/*
 
+function mortgageCalculator (principle, interest, years, creditScore) {
 
+    let name = 'Tim McDonald';
+    
+    let monthlyInterestRate = (interest / 12);
+    let periods = (years * 12);
+    
+    let n1 = Math.pow((1 + monthlyInterestRate), periods );
+    let n2 = n1 * monthlyInterestRate;
+    let numerator = n2;
+    let denominator = n1 - 1;
+    let monthlyRate = principle * (numerator / denominator);
+    monthlyRate = monthlyRate.toFixed(2);
+
+    if (creditScore > 740) {
+        monthlyRate = monthlyRate * 0.95;
+        monthlyRate = monthlyRate.toFixed(2);
+    }
+    else if (creditScore < 740 && creditScore > 660) {
+        //nothing changes
+    }
+    else {
+        monthlyRate = monthlyRate * 1.05
+        monthlyRate = monthlyRate.toFixed(2);
+    }
+
+    
+        return `${name}, your monthly rate is ${monthlyRate}`
+    }
+    
+    
+*/
 
 // 🏡 Task 6: Loops
 /* Write a new function called variableInterestRate. This function should be the same as mortgageCalculator, except it should console.log the monthly payment for 10 different interest rates at 0.5% increments plus or minus 2% from the inputted interest rate. Complete these calculations using a for loop.
@@ -87,7 +178,30 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
 
+function variableInterestRate (principle, interest, years) {
+  interest = interest - 0.025;
+  
+    for (let i = 0; i < 9; i++) {
+        interest+=.005;
 
+        
+    let name = 'Tim McDonald';
+    let monthlyInterestRate = (interest / 12);
+
+    let periods = (years * 12);
+    
+    let n1 = Math.pow((1 + monthlyInterestRate), periods );
+    let n2 = n1 * monthlyInterestRate;
+    let numerator = n2;
+    let denominator = n1 - 1;
+    let monthlyRate = principle * (numerator / denominator);
+    monthlyRate = monthlyRate.toFixed(2);
+
+    console.log( `${name}, with an interest rate of ${interest.toFixed(3)}, your monthly rate is ${monthlyRate}`);
+
+    }       
+
+}
 
 
 // 🌟🌟🌟 STRETCH 🌟🌟🌟//
